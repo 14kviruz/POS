@@ -21,8 +21,7 @@
             <thead>
               <tr>
 
-                <th>Cod. Producto</th>
-                <th>Descripcion</th>
+                <th>Código</th>
                 <th>Nombre</th>
                 <th>Precio</th>
                 <th>Imagen</th>
@@ -41,7 +40,6 @@
               ?>
                 <tr>
                   <td><?php echo $value["cod_producto"]; ?></td>
-                  <td><?php echo $value["cod_producto_sin"]; ?></td>
                   <td><?php echo $value["nombre_producto"]; ?></td>
                   <td><?php echo $value["precio_producto"]; ?></td>
                   <td><?php
@@ -90,9 +88,9 @@
           </table>
         </div>
         <!-- /.card-body -->
-
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
+      </div>
+    </div><!-- /.container-fluid -->
   </div>
-  <!-- /.content-wrapper -->
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

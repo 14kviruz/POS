@@ -1,4 +1,4 @@
-    <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -19,11 +19,11 @@
           <table id="example1" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>Cod. Actividad</th>
                 <th>Cod. Producto SIN</th>
-                <th>Descripcion</th>
+                <th>Cod. Actividad</th>
+                <th>Descripción</th>
                 <td>
-                  <button class="btn btn-primary" style="width: 100%;" onclick="SinCatalogo()">Sincronizar</button>
+                  <button class="btn btn-primary" onclick="SinCatalogo()">Sincronizar</button>
                 </td>
               </tr>
             </thead>

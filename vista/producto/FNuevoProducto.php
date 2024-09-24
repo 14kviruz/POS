@@ -1,80 +1,67 @@
 <form action="" id="FRegProducto" enctype="multipart/form-data">
-  <div class="modal-header bg-primary">
-    <h4 class="modal-title">Registro nuevo producto</h4>
+  <div class="modal-header">
+    <h4 class="modal-title">Registro Nuevo Producto</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-    <div class="modal-body">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="codProducto">Cod. Producto</label>
-            <input type="text" class="form-control" name="codProducto" id="codProducto">
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="codProductoSIN">Cod. Producto SIN</label>
-            <input type="text" class="form-control" name="codProductoSIN" id="codProductoSIN">
-          </div>
-        </div>
+  <div class="modal-body" mg-info>
+    <table class="table">
+      <div class="form-group">
+        <label for="exampleInputBorder">Cod. Producto</label>
+        <input type="text" class="form-control" placeholder="" name="codProducto" id="codProducto">
       </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="descripcion">Descripcion</label>
-            <input type="text" class="form-control" name="descripcion" id="descripcion">
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="preProducto">Precio</label>
-            <input type="text" class="form-control" name="preProducto" id="preProducto">
-          </div>
-        </div>
+      <div class="form-group">
+        <label for="exampleInputBorder">Cod. Producto SIN</label>
+        <input type="text" class="form-control" placeholder="" name="codProductoSIN" id="codProductoSIN">
       </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="unidadMedida">Unidad de medida</label>
-            <input type="text" class="form-control" name="unidadMedida" id="unidadMedida">
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="unidadMedidaSIN">Unidad de medida SIN</label>
-            <input type="text" class="form-control" name="unidadMedidaSIN" id="unidadMedidaSIN">
-          </div>
-        </div>
+
+      <div class="form-group">
+        <label for="exampleInputBorder">Descripcion</label>
+        <input type="text" class="form-control" placeholder="" name="desProducto" id="desProducto">
       </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="imgProducto">Imagen <span class="text-muted">(Peso máximo 100MB - JPG, PNG)</span></label>
-            <div class="input-group">
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="imgProducto" name="imgProducto" onchange="previsualizar()">
-                <label class="custom-file-label" for="imgProducto">Elegir archivo</label>
-              </div>
-              <div class="input-group-append">
-                <span class="input-group-text">Subir</span>
-              </div>
-            </div>
+      <div class="form-group">
+        <label for="exampleInputBorder">Precio</label>
+        <input type="text" class="form-control" placeholder="" name="preProducto" id="preProducto">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputBorder">Unidad de medida</label>
+        <input type="text" class="form-control" placeholder="" name="unidadMedidad" id="unidadMedidad">
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputBorder">Unidad de medida SIN</label>
+    <input type="text" class="form-control" placeholder="" name="unidadMedidaSIN" id="unidadMedidaSIN">
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="imgProducto">Imagen <span class="text-muted">(Peso máximo 100MB - JPG, PNG)</span></label>
+        <div class="input-group">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="imgProducto" name="imgProducto" onchange="previsualizar()">
+            <label class="custom-file-label" for="imgProducto">Elegir archivo</label>
           </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group" style="text-align:center">
-            <img src="assest/dist/img/product_default.png" alt="" width="150" class="img-thumbnail previsualizar">
+          <div class="input-group-append">
+            <span class="input-group-text">Subir</span>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-sm-6">
+      <div class="form-group" style="text-align:center">
+        <img src="assest/dist/img/product_default.png" alt="" width="150" class="img-thumbnail previsualizar">
+      </div>
+    </div>
+  </div>
+  </div>
+  </table>
+  </div>
   <div class="modal-footer justify-content-between">
     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
     <button type="submit" class="btn btn-primary">Guardar</button>
   </div>
-  
+
   <!-- /.card-footer -->
 </form>
 

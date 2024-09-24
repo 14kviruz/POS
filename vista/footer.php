@@ -45,8 +45,7 @@
 
 <div class="modal fade" id="modal-default">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div id="content-default"></div>
+    <div class="modal-content" id="content-default">
     </div>
     <!-- /.modal-content -->
   </div>
@@ -54,7 +53,6 @@
 </div>
 
 <div class="modal fade" id="modal-lg">
-
   <div class="modal-dialog modal-lg">
     <div class="modal-content" id="content-lg">
 
@@ -73,9 +71,8 @@
 <script>
   $(function() {
     $("#example1").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 

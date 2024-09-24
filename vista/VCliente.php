@@ -13,19 +13,19 @@
     <div class="container-fluid">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Lista de clientes registrados</h3>
+          <h3 class="card-title">Lista de Clientes Registrados</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
           <table id="example1" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Razon_Social</th>
-                <th>Nit</th>
-                <th>Direccion</th>
+                <th>ID</th>
+                <th>Razon Social</th>
+                <th>NIT</th>
+                <th>Dirección</th>
                 <th>Nombre</th>
-                <th>Telefono</th>
+                <th>Teléfono</th>
                 <th>Email</th>
                 <td>
                   <button class="btn btn-primary" style="width: 100%;" onclick="MNuevoCliente()">Nuevo</button>
@@ -40,7 +40,6 @@
 
                 <tr>
                 <td> <?php echo $value["id_cliente"]; ?> </td>
-                  <td> <?php echo $value["razon_social_cliente"]; ?> </td>
                   <td> <?php echo $value["nit_ci_cliente"]; ?> </td>
                   <td> <?php echo $value["direccion_cliente"]; ?> </td>
                   <td> <?php echo $value["nombre_cliente"]; ?> </td>

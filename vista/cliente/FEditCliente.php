@@ -4,7 +4,7 @@ require_once "../../controlador/clienteControlador.php";
 require_once "../../modelo/clienteModelo.php";
 
 $id = $_GET["id"];
-$cliente = ControladorCliente::ctrInfoClientes($id);
+$cliente = ControladorCliente::ctrInfoCliente($id);
 echo "<script>console.log('.$id.');</script>";
 
 

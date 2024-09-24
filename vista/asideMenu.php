@@ -9,7 +9,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item nav-link">
-         <span class="badge badge-danger" id="comunSiat">Desconectado</span>        
+          <span class="badge badge-danger" id="comunSiat">Desconectado</span>
         </li>
       </ul>
 
@@ -40,8 +40,10 @@
           <div class="image">
             <img src="assest/dist/img/user_default.png" class="img-circle elevation-2" alt="User Image">
           </div>
+
           <div class="info">
-            <a href="#" class="d-block" id="usuarioLogin">"JESUS"</a>
+            <a href="#" class="d-block" id="usuarioLogin"> <?php echo $_SESSION["login"]; ?></a>
+            <input type="hidden" id="idUsuario" value="<?php echo $_SESSION["idUsuario"] ?>;">
           </div>
         </div>
 
@@ -74,7 +76,7 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-handshake"></i>
                 <p>
-                  clientes
+                  Clientes
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -83,7 +85,7 @@
                 <li class="nav-item">
                   <a href="VCliente" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Lista de clientes</p>
+                    <p>Lista de Clientes</p>
                   </a>
                 </li>
               </ul>
@@ -93,7 +95,7 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-boxes"></i>
                 <p>
-                  productos
+                  Productos
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -102,15 +104,18 @@
                 <li class="nav-item">
                   <a href="VProducto" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Lista de productos</p>
+                    <p>Lista de Productos</p>
                   </a>
                 </li>
+              </ul>
+              <ul class="nav nav-treeview">
 
                 <li class="nav-item">
                   <a href="SinCatalogos" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>sincronizacion catalogos</p>
-                    </a>
+                  </a>
+                </li>
               </ul>
             </li>
 
@@ -118,7 +123,7 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shopping-cart"></i>
                 <p>
-                  ventas
+                  Ventas
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -130,18 +135,20 @@
                     <p>Emitir Factura</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="VFactura" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lista de Facturas</p>
+                  </a>
+                </li>
               </ul>
-
-              <li class="nav-item">
+            </li>
+            <li class="nav-item">
               <a href="salir" class="navi-link">
                 <i class="fas fa-sign-out-alt"></i>
-                <p>salir</p>
+                <p>Salir</p>
               </a>
             </li>
-            </li>
-
-            
-
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
