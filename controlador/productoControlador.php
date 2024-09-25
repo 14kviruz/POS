@@ -106,6 +106,6 @@ class ControladorProducto
 
         $codProducto = $_POST["codProducto"];
         $respuesta = ModeloProducto::mdlBusProducto($codProducto);
-        echo json_encode($codProducto);
+        echo json_encode($respuesta);
     }
 }

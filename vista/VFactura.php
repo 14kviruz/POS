@@ -1,6 +1,3 @@
-Text Compare!
-Your email address:
-(Text Compare! doesn't save or share your email address)
 <!-- Content Wrapper. Contains page content -->
  
 <div class="content-wrapper">
