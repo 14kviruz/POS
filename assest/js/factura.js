@@ -1,6 +1,6 @@
 /*variables globales*/
 
-var host = "http://localhost:5000";
+var host = "http://localhost:5000/";
 var codSistema = "775FA42BE90F7B78EF98F57"
 var cuis = "9272DC05"
 var nitEmpresa = 338794023
@@ -8,7 +8,7 @@ var rsEmpresa = "NEOMAC SRL"
 var telEmpresa = "9422560"
 var dirEmpresa = "Calle Pucara 129 AVENIDA 7MO ANILLO NRO. 7550 ZONA/BARRIO: TIERRAS NUEVAS UV:0135 MZA:007"
 var token =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTdXBlcmppY2hvMzMiLCJjb2RpZ29TaXN0ZW1hIjoiNzc1RkE0MkJFOTBGN0I3OEVGOThGNTciLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0ydGpDM05ERXdNZ1lBOFFXMzNRa0FBQUE9IiwiaWQiOjYxODYwOCwiZXhwIjoxNzMzOTYxNjAwLCJpYXQiOjE3MDI0OTc2NjAsIm5pdERlbGVnYWRvIjozMzg3OTQwMjMsInN1YnNpc3RlbWEiOiJTRkUifQ.4K_pQUXnIhgI5ymmXoyL43i0pSk3uKCgLMkmQeyl67h7j55GSRsH120AD44pR0aQ1UX_FNYzWQBYrX6pWLd-1w";
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTdXBlcmppY2hvMzMiLCJjb2RpZ29TaXN0ZW1hIjoiNzc1RkE0MkJFOTBGN0I3OEVGOThGNTciLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0ydGpDM05ERXdNZ1lBOFFXMzNRa0FBQUE9IiwiaWQiOjYxODYwOCwiZXhwIjoxNzMzOTYxNjAwLCJpYXQiOjE3MDI0OTc2NjAsIm5pdERlbGVnYWRvIjozMzg3OTQwMjMsInN1YnNpc3RlbWEiOiJTRkUifQ.4K_pQUXnIhgI5ymmXoyL43i0pSk3uKCgLMkmQeyl67h7j55GSRsH120AD44pR0aQ1UX_FNYzWQBYrX6pWLd-1w"
 var cufd;
 var codControlCufd;
 var fechaVigCufd;
@@ -65,14 +65,14 @@ function busCliente() {
     }
   })
 }
-
+//  generar numero de factura
 function numFactura() {
   let obj = ""
   $.ajax({
     type: "POST",
     url: "controlador/facturaControlador.php?ctrNumFactura",
     data: obj,
-    dataType: "json",
+
     success: function (data) {
       document.getElementById("numFactura").value = data
     }
@@ -103,14 +103,15 @@ function busProducto() {
 }
 
 function calcularPreProd() {
+
   let cantPro = parseInt(document.getElementById("cantProducto").value)
-  let descProducto = parseInt(document.getElementById("descProducto").value)
-  let preUnit = parseFloat(document.getElementById("preUnitario").value)
-  let preProducto = preUnit - descProducto
-  document.getElementById("preTotal").value = preProducto * cantPro
+  let descProducto = parseFloat(document.getElementById("descProducto").value)
+  let preUnitario = parseFloat(document.getElementById("preUnitario").value)
+  let preProducto = (preUnitario * cantPro) - descProducto
+  document.getElementById("preTotal").value = preProducto
 
 }
-
+// carrito
 var arregloCarrito = []
 var listaDetalle = document.getElementById("listaDetalle")
 function agregarCarrito() {
@@ -155,11 +156,11 @@ function dibujarTablaCarrito() {
   listaDetalle.innerHTML = ""
   arregloCarrito.forEach((detalle) => {
     let fila = document.createElement("tr")
-    fila.innerHTML = '<td>' + detalle.descripcion+'</td>'+
-      '<td>'+detalle.cantidad+'</td>'+
-      '<td>'+detalle.precioUnitario+'</td>'+
-      '<td>'+detalle.montoDescuento+'</td>'+
-      '<td>'+detalle.subtotal + '</td>'
+    fila.innerHTML = '<td>' + detalle.descripcion + '</td>' +
+      '<td>' + detalle.cantidad + '</td>' +
+      '<td>' + detalle.precioUnitario + '</td>' +
+      '<td>' + detalle.montoDescuento + '</td>' +
+      '<td>' + detalle.subtotal + '</td>'
 
     let tdEliminar = document.createElement("td")
     let botonEliminar = document.createElement("button")
@@ -235,9 +236,9 @@ function registrarNuevoCufd() {
   solicitudCufd().then(ok => {
     if (ok != "" || ok != null) {
       var obj = {
-        cufd: cufd,
-        fechaVigCufd: fechaVigCufd,
-        codControlCufd: codControlCufd,
+        "cufd": cufd,
+        "fechaVigCufd": fechaVigCufd,
+        "codControlCufd": codControlCufd,
       };
       $.ajax({
         type: "POST",
@@ -246,9 +247,9 @@ function registrarNuevoCufd() {
         cache: false,
         success: function (data) {
           if (data == "ok") {
-            $("#panelInfo").append("<span class='text-primary'>Cufd Registrado</span><br>");
+            $("#panelInfo").before("<span class='text-primary'>Cufd registrado</span><br>");
           } else {
-            $("#panelInfo").empty().append("<span class='text-danger'>Error de conexión: " + error + "</span><br>");
+            $("#panelInfo").before("<span class='text-danger'>Error de registro cufd</span><br>");
           }
         },
         error: function (xhr, status, error) {
@@ -277,12 +278,12 @@ function verificarVigenciaCufd() {
       let vigCufdActual = new Date(data["fecha_vigencia"]);
       if (date.getTime() > vigCufdActual.getTime() || data == false) {
         // agregar los mensajes
-        $("#panelInfo").append("<span class='text-warning'>Cufd Caducado</span><br>" +
-          "<span>Registrando cufd...</span><br>");
+        $("#panelInfo").before("<span class='text-warning'>Cufd caducado!</span><br>")
+          $("#panelInfo").before("<span>registrando cufd...</span><br>");
         registrarNuevoCufd()
       } else {
-        $("#panelInfo").append("<span class='text-success'>Cufd Vigente, Puede Facturar</span><br>");
-       //Actualizar variables
+        $("#panelInfo").before("<span class='text-success'>Cufd vigente, puede facturar!</span><br>");
+        //Actualizar variables
         cufd = data["codigo_cufd"]
         codControlCufd = data["codigo_control"]
         fechaVigCufd = data["fecha_vigencia"]
@@ -334,7 +335,7 @@ function validarFormulario() {
   let emailCliente = document.getElementById("emailCliente").value
   let rsCliente = document.getElementById("rsCliente").value
 
-  if (numFactura == null || numFactura.length == 0) {
+  if (numFactura = null || numFactura.length == 0) {
     $("#panelInfo").before("<span class='text-danger'>Asegurar de llenar los campos!!!</span><br>");
     return false
   } else if (nitCliente == null || nitCliente.length == 0) {
@@ -382,7 +383,7 @@ function emitirFactura() {
       codigoPuntoVentaSpecified: true,
       codigoSistema: codSistema,
       codigoSucursal: 0,
-      cufd: "cufd",
+      cufd: cufd,
       cuis: cuis,
       nit: nitEmpresa,
       tipoFacturaDocumento: 1,
@@ -423,7 +424,7 @@ function emitirFactura() {
           usuario: usuarioLogin,
           codigoDocumentoSector: 1,
         },
-        detalle:arregloCarrito
+        detalle: arregloCarrito
       },
 
     }
@@ -436,6 +437,8 @@ function emitirFactura() {
       contentType: "application/json",
       processData: false,
       success: function (data) {
+        console.log(data)
+
         if (data["codigoResultado"] != 908) {
           $("#panelInfo").before("<span class='text-danger'>Error, Factura no Emitida</span><br>")
         } else {
@@ -447,7 +450,7 @@ function emitirFactura() {
             sentDate: data["datoAdicional"]["sentDate"],
             xml: data["datoAdicional"]["xml"],
           }
-          registrarFactura(datos);
+          registrarFactura(datos)
         }
       }
     })
@@ -455,7 +458,7 @@ function emitirFactura() {
 }
 
 function registrarFactura(datos) {
-  
+
   let numFactura = document.getElementById("numFactura").value
   let idCliente = document.getElementById("idCliente").value
   let subTotal = parseFloat(document.getElementById("subTotal").value)
@@ -510,99 +513,99 @@ function registrarFactura(datos) {
   })
 }
 
-function MVerFactura(id){
+function MVerFactura(id) {
   $("#modal-xl").modal("show");
-  
-  var obj="";
+
+  var obj = "";
   $.ajax({
- 
-     type:"POST",
-     url:"vista/factura/MVerFactura.php?id="+id,
-     data: obj,
-     success: function(data) {
-         $("#content-xl").html(data);
-     }
+
+    type: "POST",
+    url: "vista/factura/MVerFactura.php?id=" + id,
+    data: obj,
+    success: function (data) {
+      $("#content-xl").html(data);
+    }
   })
 }
 
-function MEliFactura(cuf){
-  let obj={
-    codigoAmbiente:2,
-    codigoPuntoVenta:0,
-    codigoPuntoVentaSpecified:true,
-    codigoSistema:codSistema,
-    codigoSucursal:0,
-    nit:nitEmpresa,
-    codigoDocumentoSector:1,
-    codigoEmision:1,
-    codigoModalidad:2,
-    cufd:cufd,
-    cuis:cuis,
-    tipoFacturaDocumento:1,
-    codigoMotivo:1,
-    cuf:cuf
+function MEliFactura(cuf) {
+  let obj = {
+    codigoAmbiente: 2,
+    codigoPuntoVenta: 0,
+    codigoPuntoVentaSpecified: true,
+    codigoSistema: codSistema,
+    codigoSucursal: 0,
+    nit: nitEmpresa,
+    codigoDocumentoSector: 1,
+    codigoEmision: 1,
+    codigoModalidad: 2,
+    cufd: cufd,
+    cuis: cuis,
+    tipoFacturaDocumento: 1,
+    codigoMotivo: 1,
+    cuf: cuf
   }
   Swal.fire({
-    title:"¿Está seguro de anular esta factura?",
-    showDenyButton:true,
-    showCancelButton:false,
-    confirmButtonText:'Confirmar',
-    denyButtonText:'Cancelar'
-}).then((result)=>{
-    if(result.isConfirmed){
-        $.ajax({
-            type:"POST",
-            url:host+"api/CompraVenta/anulacion",
-            data:JSON.stringify(obj),
-            cache:false,
-            contentType:"application/json",
-            processData:false,
-            success: function(data) {
-              if(data["codigoEstado"]==905){
-                anularFactura(cuf)
-              }
-              else{
-                Swal.fire({
-                  icon:'error',
-                  title:"ERROR",
-                  text:"Anulación rechazada",
-                  showConfirmButton:false,
-                  timer:1000
-              })
-              }
-            }
-        })
+    title: "Estas seguro de anular esta factura?",
+    showDenyButton: true,
+    showCancelButton: false,
+    confirmButtonText: 'Confirmar',
+    denyButtonText: "Cancelar"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: host + "api/CompraVenta/anulacion",
+        data: JSON.stringify(obj),
+        cache: false,
+        contentType: "application/json",
+        processData: false,
+        success: function (data) {
+          if (data["codigoEstado"] == 905) {
+            anularFactura(cuf)
+          }
+          else {
+            Swal.fire({
+              icon: 'error',
+              title: 'ERROR',
+              text: 'Anulación rechazada',
+              showConfirmButton: false,
+              timer: 1000
+            })
+          }
+        }
+      })
     }
-})
+  })
 }
-function anularFactura(cuf){
-  let obj={
-    cuf:cuf
+function anularFactura(cuf) {
+  let obj = {
+    cuf: cuf
   }
   $.ajax({
-    type:"POST",
-    url:"controlador/facturaControlador.php?ctrAnularFactura",
-    data:obj,
-    success: function(data) {
-      if(data=="ok"){
+    type: "POST",
+    url: "controlador/facturaControlador.php?ctrAnularFactura",
+    data: obj,
+    success: function (data) {
+      if (data == "ok") {
         Swal.fire({
-          icon:'success',
-          title:"Factura Anulada ",
-          showConfirmButton:false,
-          timer:1000
-      })
-      setTimeout(function(){
-        location.reload()
-      },1200)
-      }else{
+          icon: 'success',
+          title: 'Factura Anulada',
+          showConfirmButton: false,
+          timer: 1000
+        })
+        setTimeout(function () {
+          location.reload()
+        }, 1200)
+      } else {
         Swal.fire({
-          icon:'error',
-          title:"ERROR",
-          text:"Error al anular",
-          showConfirmButton:false,
-          timer:1000
-      })
+          icon: 'error',
+          title: "ERROR",
+          text: "Error al anular",
+          showConfirmButton: false,
+          timer: 1000
+        })
       }
     }
-})
+  })
 }
