@@ -53,15 +53,15 @@ class ControladorFactura
 
 
 
-    /*  $respuesta = ModeloFactura::mdlEdiFactura($data);
+    /*  $respuesta = Modelofactura::mdlEdiFactura($data);
 
     echo $respuesta;*/
   }
 
   static public function ctrAnularFactura()
   {
-    require "../modelo/FacturaModelo.php";
-    $cufd = $_POST["cuf"];
+    require "../modelo/facturaModelo.php";
+    $cuf = $_POST["cuf"];
 
     $respuesta = ModeloFactura::mdlAnularFactura($cuf);
     echo $respuesta;
@@ -69,7 +69,7 @@ class ControladorFactura
 
   static public function ctrNumFactura()
   {
-    require "../modelo/FacturaModelo.php";
+    require "../modelo/facturaModelo.php";
 
     $respuesta = ModeloFactura::mdlNumFactura();
 
@@ -82,7 +82,7 @@ class ControladorFactura
 
   static public function ctrNuevoCufd()
   {
-    require "../modelo/FacturaModelo.php";
+    require "../modelo/facturaModelo.php";
     $data = array(
       "cufd" => $_POST["cufd"],
       "fechaVigCufd" => $_POST["fechaVigCufd"],
@@ -93,14 +93,14 @@ class ControladorFactura
 
   static public function ctrUltimoCufd()
   {
-    require "../modelo/FacturaModelo.php";
+    require "../modelo/facturaModelo.php";
 
     $respuesta = ModeloFactura::mdlUltimoCufd();
     echo json_encode($respuesta);
   }
   static public function ctrLeyenda()
   {
-    require "../modelo/FacturaModelo.php";
+    require "../modelo/facturaModelo.php";
 
     $respuesta = ModeloFactura::mdlLeyenda();
     echo json_encode($respuesta);

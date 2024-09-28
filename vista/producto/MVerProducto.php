@@ -41,12 +41,12 @@ $producto = ControladorProducto::ctrInfoProducto($id);
                 <tr>
                     <th>Unidad Medida</th>
                     <td>
-                        <?php echo $producto["unida_medidad"]; ?></td>
+                    <td><?php echo $producto["unidad_medida"]; ?></td>
                 </tr>
                 <tr>
                     <th>Unidad Medida SIN</th>
                     <td>
-                        <?php echo $producto["unidad_medida_sin"]; ?></td>
+                    <td><?php echo $producto["unidad_medida_sin"]; ?></td>
                 </tr>
                 <tr>
                     <th>Estado</th>

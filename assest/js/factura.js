@@ -72,7 +72,7 @@ function numFactura() {
     type: "POST",
     url: "controlador/facturaControlador.php?ctrNumFactura",
     data: obj,
-
+   
     success: function (data) {
       document.getElementById("numFactura").value = data
     }
@@ -107,13 +107,16 @@ function calcularPreProd() {
   let cantPro = parseInt(document.getElementById("cantProducto").value)
   let descProducto = parseFloat(document.getElementById("descProducto").value)
   let preUnitario = parseFloat(document.getElementById("preUnitario").value)
+
+
   let preProducto = (preUnitario * cantPro) - descProducto
   document.getElementById("preTotal").value = preProducto
 
 }
-// carrito
+// Carrito
 var arregloCarrito = []
 var listaDetalle = document.getElementById("listaDetalle")
+
 function agregarCarrito() {
 
   let actEconomica = document.getElementById("actEconomica").value
@@ -142,6 +145,7 @@ function agregarCarrito() {
   arregloCarrito.push(objDetalle)
   dibujarTablaCarrito()
 
+// borrar el formulario de carrito
   document.getElementById("codProducto").value = ""
   document.getElementById("conceptoPro").value = ""
   document.getElementById("cantProducto").value = 0
@@ -252,8 +256,7 @@ function registrarNuevoCufd() {
             $("#panelInfo").before("<span class='text-danger'>Error de registro cufd</span><br>");
           }
         },
-        error: function (xhr, status, error) {
-        },
+       
       });
     }
   });
@@ -265,7 +268,9 @@ verificar vigencia cufd
 ===============*/
 
 function verificarVigenciaCufd() {
+  // fecha actual
   let date = new Date();
+// obtener el ultimo registro de cufd de DB  
   var obj = "";
   $.ajax({
     type: "POST",
@@ -274,12 +279,12 @@ function verificarVigenciaCufd() {
     cache: false,
     dataType: "json",
     success: function (data) {
-      //comprobacion
+      //fecha del ultimo cufd de DB
       let vigCufdActual = new Date(data["fecha_vigencia"]);
       if (date.getTime() > vigCufdActual.getTime() || data == false) {
         // agregar los mensajes
         $("#panelInfo").before("<span class='text-warning'>Cufd caducado!</span><br>")
-          $("#panelInfo").before("<span>registrando cufd...</span><br>");
+          $("#panelInfo").before("<span>Registrando cufd...</span><br>");
         registrarNuevoCufd()
       } else {
         $("#panelInfo").before("<span class='text-success'>Cufd vigente, puede facturar!</span><br>");
@@ -329,7 +334,7 @@ function extraerLeyenda() {
 /**============
  validar formulario 
  ============*/
-function validarFormulario() {
+function validarformulario() {
   let numFactura = document.getElementById("numFactura").value
   let nitCliente = document.getElementById("nitCliente").value
   let emailCliente = document.getElementById("emailCliente").value
@@ -356,7 +361,8 @@ function validarFormulario() {
  emitit factura 
 ============*/
 function emitirFactura() {
-  if (validarFormulario() == true) {
+
+  if (validarformulario() == true) {
 
 
     let date = new Date()
@@ -440,9 +446,9 @@ function emitirFactura() {
         console.log(data)
 
         if (data["codigoResultado"] != 908) {
-          $("#panelInfo").before("<span class='text-danger'>Error, Factura no Emitida</span><br>")
+          $("#panelInfo").before("<span class='text-danger'>Error, Factura no emitida!</span><br>")
         } else {
-          $("#panelInfo").before("<span>Registrando Factura...</span><br>")
+          $("#panelInfo").before("<span>Registrado factura...</span><br>")
           let datos = {
             codigoResultado: data["codigoResultado"],
             codigoRecepcion: data["datoAdicional"]["codigoRecepcion"],
@@ -491,7 +497,7 @@ function registrarFactura(datos) {
     data: obj,
     cache: false,
     success: function (data) {
-      if (data = "ok") {
+      if (data == "ok") {
         Swal.fire({
           icon: "success",
           showConfirmButton: false,
@@ -516,7 +522,7 @@ function registrarFactura(datos) {
 function MVerFactura(id) {
   $("#modal-xl").modal("show");
 
-  var obj = "";
+  var obj ="";
   $.ajax({
 
     type: "POST",
@@ -553,6 +559,7 @@ function MEliFactura(cuf) {
     denyButtonText: "Cancelar"
   }).then((result) => {
     if (result.isConfirmed) {
+      // anular la factura
       $.ajax({
         type: "POST",
         url: host + "api/CompraVenta/anulacion",
@@ -560,16 +567,17 @@ function MEliFactura(cuf) {
         cache: false,
         contentType: "application/json",
         processData: false,
+        //console.log(data)
         success: function (data) {
           if (data["codigoEstado"] == 905) {
+            //anular en DB
             anularFactura(cuf)
-          }
-          else {
+          }else {
             Swal.fire({
               icon: 'error',
               title: 'ERROR',
-              text: 'Anulación rechazada',
-              showConfirmButton: false,
+              text: 'AnulaciOn rechazada',
+              showConfirmButton:false,
               timer: 1000
             })
           }
@@ -580,6 +588,7 @@ function MEliFactura(cuf) {
 }
 function anularFactura(cuf) {
   let obj = {
+    //validadr si el cuf tiene un valor
     cuf: cuf
   }
   $.ajax({
@@ -587,15 +596,16 @@ function anularFactura(cuf) {
     url: "controlador/facturaControlador.php?ctrAnularFactura",
     data: obj,
     success: function (data) {
+      //aviso de confirmacion
       if (data == "ok") {
         Swal.fire({
           icon: 'success',
-          title: 'Factura Anulada',
+          title: "Factura Anulada",
           showConfirmButton: false,
           timer: 1000
         })
         setTimeout(function () {
-          location.reload()
+          location.reload();
         }, 1200)
       } else {
         Swal.fire({
