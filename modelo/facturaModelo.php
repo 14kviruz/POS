@@ -5,7 +5,7 @@ class ModeloFactura
 
   static public function mdlInfoFacturas()
   {
-    $stmt = Conexion::conectar()->prepare("SELECT id_factura, codigo_factura, detalle, descuento, fecha_emision, total, estado_factura, cuf FROM factura JOIN cliente ON cLIENTE.id_cliente=factura.id_cliente");
+    $stmt = Conexion::conectar()->prepare("SELECT id_factura, codigo_factura, detalle, descuento, fecha_emision, total,  cuf FROM factura JOIN cliente ON cLIENTE.id_cliente=factura.id_cliente");
     $stmt->execute();
 
     return $stmt->fetchAll();
@@ -56,7 +56,7 @@ class ModeloFactura
    }
   static public function mdlAnularFactura($cuf)
   {
-    $stmt = Conexion::conectar()->prepare("UPDATE factura SET estado_factura=0 where cuf='$cuf'");
+  $stmt = Conexion::conectar()->prepare("UPDATE factura SET estado_factura=0 where cuf='$cuf'");
 
     if($stmt->execute()){
       return "ok";
@@ -90,6 +90,8 @@ class ModeloFactura
     } else {
       return "error";
     }
+    $stmt->close();
+    $stmt->null();
 
   }
   static public function mdlUltimoCufd()

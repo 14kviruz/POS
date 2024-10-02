@@ -21,8 +21,13 @@ session_start();
   <!-- Theme style -->
   <link rel="stylesheet" href="assest/dist/css/adminlte.min.css">
   <link rel="icon" href="assest/dist/img/logo_POS.png">
+  
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="assest/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="assest/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="assest/summernote/summernote-bs4.min.css">
 </head>
 
 <?php

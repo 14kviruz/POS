@@ -207,38 +207,41 @@ obtencion de cufd
 =============*/
 function solicitudCufd() {
   return new Promise((resolve, reject) => {
+
     var obj = {
-      codigoAmbiente: 2,
-      codigoModalidad: 2,
-      codigoPuntoVenta: 0,
-      codigoPuntoVentaSpecified: true,
-      codigoSistema: codSistema,
-      codigoSucursal: 0,
-      nit: nitEmpresa,
-      cuis: cuis,
-    };
+      codigoAmbiente:2,
+      codigoModalidad:2,
+      codigoPuntoVenta:0,
+      codigoPuntoVentaSpecified:true,
+      codigoSistema:codSistema,
+      codigoSucursal:0,
+      nit:nitEmpresa,
+      cuis:cuis,
+    }
     $.ajax({
       type: "POST",
-      url: host + "api/Codigos/solicitudCufd?token=" + token,
+      url: host + "api/Codigos/solicitudCufd?token="+token,
       data: JSON.stringify(obj),
       cache: false,
       contentType: "application/json",
-      success: function (data) {
+      success: function (data){
         cufd = data["codigo"];
         codControlCufd = data["codigoControl"];
         fechaVigCufd = data["fechaVigencia"];
-        resolve(cufd);
-      },
-    });
-  });
+
+        resolve(cufd)
+
+      }
+    })
+  })
 }
 
 /**=============
 registrar nuevo cufd 
 =============*/
 function registrarNuevoCufd() {
-  solicitudCufd().then(ok => {
-    if (ok != "" || ok != null) {
+  solicitudCufd().then(ok=>{
+    if (ok!="" || ok != null){
       var obj = {
         "cufd": cufd,
         "fechaVigCufd": fechaVigCufd,
@@ -250,12 +253,15 @@ function registrarNuevoCufd() {
         url: "controlador/facturaControlador.php?ctrNuevoCufd",
         cache: false,
         success: function (data) {
+          
+          console.log(taba)
+          
           if (data == "ok") {
             $("#panelInfo").before("<span class='text-primary'>Cufd registrado</span><br>");
           } else {
             $("#panelInfo").before("<span class='text-danger'>Error de registro cufd</span><br>");
           }
-        },
+        }
        
       });
     }
@@ -407,34 +413,35 @@ function emitirFactura() {
           cuf: "String",
           cufd: cufd,
           codigoSucursal: 0,
-          direccion: dirEmpresa,
+          direccion:dirEmpresa,
           codigoPuntoVenta: 0,
-          fechaEmision: fechaFactura,
-          nombreRazonSocial: rsCliente,
-          codigoTipoDocumentoIdentidad: tpDocumento,
-          numeroDocumento: nitCliente,
-          complemento: "",
-          codigoCliente: nitCliente,
-          codigoMetodoPago: metPago,
+          fechaEmision:fechaFactura,
+          nombreRazonSocial:rsCliente,
+          codigoTipoDocumentoIdentidad:tpDocumento,
+          numeroDocumento:nitCliente,
+          complemento:"",
+          codigoCliente:nitCliente,
+          codigoMetodoPago:metPago,
           numeroTarjeta: null,
-          montoTotal: subTotal,
-          montoTotalSujetoIva: totApagar,
+          montoTotal:totApagar,  // es el total (subtotal - descuento)
+          montoTotalSujetoIva: totApagar, // es el total (subtotal - descuento)
           codigoMoneda: 1,
           tipoCambio: 1,
-          montoTotalMoneda: totApagar,
+          montoTotalMoneda: totApagar, // es el total (subtotal - descuento)
           montoGiftCard: 0,
           descuentoAdicional: descAdicional,
           codigoExcepcion: 0,
           cafc: null,
-          leyenda: leyenda,
-          usuario: usuarioLogin,
-          codigoDocumentoSector: 1,
+          leyenda:leyenda,
+          usuario:usuarioLogin,
+          codigoDocumentoSector:1
         },
         detalle: arregloCarrito
       },
 
     }
-    /* console.log(JSON.stringify(obj)) */
+    console.log(JSON.stringify(obj)) 
+
     $.ajax({
       type: "POST",
       url: host + "api/CompraVenta/recepcion",
