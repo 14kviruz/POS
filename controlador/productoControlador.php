@@ -108,4 +108,10 @@ class ControladorProducto
         $respuesta = ModeloProducto::mdlBusProducto($codProducto);
         echo json_encode($respuesta);
     }
+    static function ctrCantidadProductos()
+    {
+
+        $respuesta = ModeloProducto::mdlCantidadProductos();
+        return $respuesta;
+    }
 }

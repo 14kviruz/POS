@@ -117,4 +117,12 @@ class ControladorUsuario
         $respuesta = ModeloUsuario::mdlEliUsuario($id);
         echo $respuesta;
     }
+
+    
+    static function ctrCantidadUsuarios()
+  {
+
+      $respuesta = ModeloUsuario::mdlCantidadUsuarios();
+      return $respuesta;
+  }
 }//final

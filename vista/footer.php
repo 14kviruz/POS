@@ -45,6 +45,8 @@
 <script src="assest/js/cliente.js"></script>
 <script src="assest/js/producto.js"></script>
 <script src="assest/js/factura.js"></script>
+<script src="assest/js/reporte.js"></script>
+
 
 <!------- /.seccion de modals ------>
 

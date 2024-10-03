@@ -98,4 +98,17 @@ class ModeloCliente
       return "error";
     }
   }
+
+  
+  static public function mdlCantidadClientes()
+  {
+  $stmt = Conexion::conectar()->prepare("select count(*) as cliente from cliente");
+  $stmt->execute();
+
+  return $stmt->fetch();
+
+  $stmt->close();
+  $stmt->null;
+
+}
 }

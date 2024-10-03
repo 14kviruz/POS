@@ -126,4 +126,13 @@ class ControladorFactura
     $respuesta = ModeloFactura::mdlRegistrarFactura($data);
     echo $respuesta;
   }
+
+  
+  static function ctrCantidadVentas()
+  {
+
+      $respuesta = ModeloFactura::mdlCantidadVentas();
+      return $respuesta;
+  }
+
 }
